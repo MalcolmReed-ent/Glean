@@ -1,0 +1,101 @@
+   ___ _    ___   _   _  _ 
+  / __| |  | __| /_\ | \| |
+ | (_ | |__| _| / _ \| .` |
+  \___|____|___/_/ \_\_|\_|
+  https://github.com/MalcolmReed-ent/Glean
+  https://github.com/MalcolmReed-ent/Glean/bugs.html
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+Glean - Reddit Content Harvester
+
+A versatile command-line tool for gleaning posts and media from Reddit subreddits.
+
+Features:
+- Fetch posts from any public subreddit
+- Download images and videos (including YouTube videos)
+- Customizable post categories: hot, new, top
+- Limit the number of posts to fetch
+- Set minimum score threshold for posts
+- Custom file naming scheme for downloaded media
+- Time filter for 'top' category posts
+- Verbose output option for detailed information
+
+Dependencies:
+- C compiler (gcc or clang)
+- libcurl
+- json-c
+- yt-dlp (for video downloads)
+
+Installing Dependencies:
+
+Ubuntu/Debian:
+  sudo apt-get update
+  sudo apt-get install gcc libcurl4-openssl-dev libjson-c-dev yt-dlp
+
+macOS (using Homebrew):
+  brew install gcc libcurl json-c python
+  pip3 install yt-dlp
+
+Windows:
+  It's recommended to use Windows Subsystem for Linux (WSL) and follow the Ubuntu/Debian instructions.
+
+Compilation:
+  make
+
+Usage:
+  ./glean [OPTIONS]
+
+Options:
+  -s, --subreddit <subreddit>  Specify the subreddit (required)
+  -c, --category <category>    Specify the category (hot, new, top) (default: hot)
+  -l, --limit <number>         Specify the number of posts to fetch (default: 25)
+  -d, --download-media         Download media files (videos and images)
+  -o, --output-dir <directory> Specify the download directory (default: reddit_downloads)
+  -f, --file-scheme <scheme>   Specify the file naming scheme (default: {POSTID}_{REDDITOR})
+  -m, --min-score <number>     Specify the minimum score for posts to download
+  -t, --time-filter <filter>   Specify the time filter for 'top' category (hour, day, week, month, year, all)
+  -v, --verbose                Enable verbose output
+  -h, --help                   Display help message
+
+Examples:
+
+1. Fetch the top 50 posts from r/pics:
+   ./glean -s pics -c top -l 50
+
+2. Download media from the 100 hottest posts in r/aww with a minimum score of 1000:
+   ./glean -s aww -c hot -l 100 -d -m 1000
+
+3. Fetch the top 200 posts of the week from r/news with custom file naming:
+   ./glean -s news -c top -l 200 -d -t week -f "{UPVOTES}_{REDDITOR}_{POSTID}_{DATE}"
+
+4. Download media from the 50 newest posts in r/videos to a custom directory:
+   ./glean -s videos -c new -l 50 -d -o my_videos
+
+File Naming Scheme:
+When using the -f or --file-scheme option, you can customize the file names of downloaded media. Available placeholders:
+- {UPVOTES}: Number of upvotes
+- {REDDITOR}: Username of the post author
+- {POSTID}: Unique ID of the post
+- {DATE}: Post creation date (format: YYYYMMDD)
+
+Example: -f "{UPVOTES}_{REDDITOR}_{POSTID}_{DATE}"
+
+Notes:
+- Respect Reddit's API rules and avoid making too many requests in a short time.
+- Some subreddits may have restrictions on scraping. Always check the subreddit rules before scraping.
+- Downloaded videos are saved in MP4 format.
+- The program uses yt-dlp for video downloads, which supports various video hosting platforms.
+
+Troubleshooting:
+- If you encounter SSL certificate errors, you may need to update your SSL certificates or specify the certificate file location.
+- For video download issues, ensure that yt-dlp is up to date: pip3 install --upgrade yt-dlp
+- If you're having problems with specific URLs or media types, check if they're supported by yt-dlp.
+
+Contributing:
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+License:
+This project is open source and available under the MIT License.

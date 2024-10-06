@@ -1,0 +1,58 @@
+.TH GLEAN 1 "May 2023" "Version 1.0" "User Commands"
+.SH NAME
+glean \- Reddit content harvester
+.SH SYNOPSIS
+.B glean
+[\fIOPTIONS\fR]
+.SH DESCRIPTION
+.B glean
+is a command-line tool for fetching posts and media from Reddit subreddits.
+.SH OPTIONS
+.TP
+.BR \-s ", " \-\-subreddit =\fISUBREDDIT\fR
+Specify the subreddit (required)
+.TP
+.BR \-c ", " \-\-category =\fICATEGORY\fR
+Specify the category (hot, new, top) (default: hot)
+.TP
+.BR \-l ", " \-\-limit =\fINUMBER\fR
+Specify the number of posts to fetch (default: 25)
+.TP
+.BR \-d ", " \-\-download\-media
+Download media files (videos and images)
+.TP
+.BR \-o ", " \-\-output\-dir =\fIDIRECTORY\fR
+Specify the download directory (default: reddit_downloads)
+.TP
+.BR \-f ", " \-\-file\-scheme =\fISCHEME\fR
+Specify the file naming scheme (default: {POSTID}_{REDDITOR})
+.TP
+.BR \-m ", " \-\-min\-score =\fINUMBER\fR
+Specify the minimum score for posts to download
+.TP
+.BR \-t ", " \-\-time\-filter =\fIFILTER\fR
+Specify the time filter for 'top' category (hour, day, week, month, year, all)
+.TP
+.BR \-v ", " \-\-verbose
+Enable verbose output
+.TP
+.BR \-h ", " \-\-help
+Display help message
+.SH EXAMPLES
+.TP
+Fetch the top 50 posts from r/pics:
+.B glean \-s pics \-c top \-l 50
+.TP
+Download media from the 100 hottest posts in r/aww with a minimum score of 1000:
+.B glean \-s aww \-c hot \-l 100 \-d \-m 1000
+.TP
+Fetch the top 200 posts of the week from r/news with custom file naming:
+.B glean \-s news \-c top \-l 200 \-d \-t week \-f "{UPVOTES}_{REDDITOR}_{POSTID}_{DATE}"
+.SH AUTHOR
+Written by [Malcolm Reed].
+.SH BUGS
+Report bugs to [Your Email or Issue Tracker URL].
+.SH COPYRIGHT
+Copyright © 2023 [Your Name]. License MIT: <https://opensource.org/licenses/MIT>.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
